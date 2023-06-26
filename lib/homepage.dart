@@ -1,9 +1,9 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:makla/data.dart';
 // import 'package:location/location.dart';
 // import 'package:restaurent_app/core/const/AppConsts.dart';
 
@@ -86,73 +86,88 @@ class MapSampleState extends State<MapSample> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-          child: Stack(
-            children: [
-              GoogleMap(
-                mapType: MapType.normal,
-                myLocationButtonEnabled: true,
-
-                initialCameraPosition: _kGooglePlex,
-                onMapCreated: (GoogleMapController controller) {
-                  _controller.complete(controller);
-                },
-                polylines: {
-                  Polyline(
-                    polylineId: const PolylineId("route"),
-                    points: polylineCoordiantes,
-                    color: Colors.black,
-                    width: 6,
-                  )
-                },
-                markers: {
-                  // const Marker(
-                  //   markerId: MarkerId("source"),
-                  //   position: sourceLocation,
-                  // ),36.753107709123775, 3.4906133502296357
-                  Marker(
-                    markerId: const MarkerId("current Location"),
-                    position: LatLng(36.753107709123775, 3.4906133502296357),
-                    anchor: const Offset(0.5, 1.0),
-                  ),
-                  const Marker(
-                    markerId: MarkerId("destination"),
-                    position: destinationLocation,
-                  ),
-                },
-                // onCameraMove: (position) {
-                //   log(position.zoom.toString());
-                // },
+      backgroundColor: Color(0xFFEBE5DF),
+      body: Column(
+        children: [
+          Container(
+            height: 100,
+            child: const Center(
+              child: Text(
+                'Bouira ',
+                style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-              Column(children: [
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, left: 20, right: 15),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButton(
-                          onPressed: () {}, icon: const Icon(Icons.arrow_back)),
-                      searchBar(search),
-                      Container(
-                        height: 32,
-                        width: 32,
-                        decoration: const BoxDecoration(
-                          color: Colors.black,
-                          shape: BoxShape.circle,
-                        ),
-                      ),
-                    ],
-                  ),
-                )
-              ]),
-            ],
+            ),
           ),
-        ),
-        floatingActionButton: FloatingActionButton.extended(
-          onPressed: _goToTheLake,
-          label: const Text('To the destination'),
-          icon: const Icon(Icons.directions_boat),
-        ));
+          Container(
+            height: 300,
+            child: GoogleMap(
+              mapType: MapType.normal,
+              myLocationButtonEnabled: true,
+              initialCameraPosition: CameraPosition(
+                target: LatLng(36.6599, 4.9108),
+                zoom: 17,
+              ),
+              onMapCreated: (GoogleMapController controller) {
+                _controller.complete(controller);
+              },
+              polylines: {
+                Polyline(
+                  polylineId: PolylineId("route"),
+                  points: polylineCoordiantes,
+                  color: Colors.black,
+                  width: 6,
+                ),
+              },
+               markers: Set<Marker>.from(
+                RestaurantData.restaurants.map(
+                  (restaurant) => Marker(
+                    markerId: MarkerId(restaurant.name),
+                    position: LatLng(restaurant.latitude, restaurant.longitude),
+                  ),
+                ),
+              ),
+            ),
+          ),
+          Expanded(
+            child: Column(
+              children: [
+                const Padding(
+                  padding: EdgeInsets.all(16),
+                  child: Text(
+                    'List of Restaurants',
+                    style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.separated(
+                    separatorBuilder: (context, index) => const SizedBox(
+                      height: 15,
+                    ),
+                    itemCount: RestaurantData.restaurants.length,
+                    itemBuilder: (context, index) {
+                      final restaurant = RestaurantData.restaurants[index];
+                      return restaurantItem(restaurant.name , restaurant.location);
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+      // floatingActionButton: FloatingActionButton.extended(
+      //   onPressed: _goToTheLake,
+      //   label: Text('To the destination'),
+      //   icon: Icon(Icons.directions_boat),
+      // ),
+    );
   }
 
   Future<void> _goToTheLake() async {
@@ -160,22 +175,74 @@ class MapSampleState extends State<MapSample> {
     controller.animateCamera(CameraUpdate.newCameraPosition(_kLake));
   }
 
-  Widget searchBar(search) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.6,
-      height: 36,
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: const BorderRadius.all(Radius.circular(11)),
-        border: Border.all(color: const Color(0xFFBEC5D1)),
-      ),
-      child: const Padding(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 1),
-        // child: SearchFieledInput(
-        //     fillColor: 0xFFFFFFFF,
-        //     hintText: '     Search',
-        //     textEditingController: search,
-        //     textInputType: TextInputType.text),
+  Widget restaurantItem(String name, String location) {
+    return Padding(
+      padding: const EdgeInsets.only(right: 32, left: 32),
+      child: Container(
+        height: 76,
+        decoration: const BoxDecoration(
+          color: Color(0xFFF56210),
+          borderRadius: BorderRadius.all(
+            Radius.circular(20),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.only(right: 20, left: 20, top: 15, bottom: 15),
+          child: Row(
+            children: [
+              const CircleAvatar(
+                radius: 16,
+                // Replace with the profile picture of the restaurant
+                backgroundImage: NetworkImage(
+                    "https://media-cdn.tripadvisor.com/media/photo-s/1b/6b/33/12/getlstd-property-photo.jpg"),
+              ),
+              const SizedBox(width: 16),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Text(
+                      name,
+                      style: const TextStyle(
+                        fontSize: 20,
+                        // fontWeight: FontWeight.bold,
+                        color: Color(0xFFFFFFFF),
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                    // SizedBox(height: 4),
+                    Text(
+                      location,
+                      style: const TextStyle(
+                        color: Color(0xFFFFFFFF),
+                        fontSize: 12,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ],
+                ),
+              ),
+              const Row(
+                children: [
+                  Text(
+                    '150m',
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: Color(0xFFFFFFFF),
+                    ),
+                  ),
+                  SizedBox(width: 4),
+                  Icon(
+                    Icons.location_on_outlined,
+                    size: 21,
+                    color: Color(0xFFFFFFFF),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ),
       ),
     );
   }
