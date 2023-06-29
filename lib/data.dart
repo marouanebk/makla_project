@@ -18,6 +18,18 @@ class RestaurantData {
       latitude: 36.6597,
       longitude: 4.9105,
     ),
+    Restaurant(
+      name: 'Restaurant D',
+      location: '789 Oak St, City A',
+      latitude: 36.6597,
+      longitude: 4.9105,
+    ),
+    Restaurant(
+      name: 'Restaurant E',
+      location: '789 Oak St, City A',
+      latitude: 36.6597,
+      longitude: 4.9105,
+    ),
   ];
 }
 
