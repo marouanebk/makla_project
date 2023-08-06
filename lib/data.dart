@@ -7,6 +7,48 @@ class RestaurantData {
       longitude: 4.9106,
     ),
     Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
+      name: 'Restaurant A',
+      location: '123 Main St, City A',
+      latitude: 36.6598,
+      longitude: 4.9106,
+    ),
+    Restaurant(
       name: 'Restaurant B',
       location: '456 Elm St, City A',
       latitude: 36.6599,

@@ -6,7 +6,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
     return AppBar(
       backgroundColor: Colors.black,
       leading: Padding(
-        padding: const EdgeInsets.only(top: 15.0, left: 8.0),
+        padding: const EdgeInsets.only(top: 10.0, left: 20.0),
         child: IconButton(
           icon: const Icon(
             Icons.settings,
@@ -16,9 +16,16 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
           onPressed: () {},
         ),
       ),
+      title: Text(
+        'M',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+            color: Colors.white, fontFamily: 'Digory Doodles', fontSize: 10),
+      ),
+      centerTitle: true,
       actions: [
         Padding(
-          padding: const EdgeInsets.only(top: 15.0, right: 8.0),
+          padding: const EdgeInsets.only(top: 10.0, right: 20.0),
           child: IconButton(
             icon: const Icon(
               Icons.help_outline,

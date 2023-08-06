@@ -75,73 +75,71 @@ class HomePageState extends State<HomePage> {
         padding: const EdgeInsets.all(20.0),
         child: Column(
           children: [
-            RichText(
-              text: const TextSpan(
-                style: TextStyle(
-                  fontSize: 24.0,
-                  wordSpacing: 1,
-                  letterSpacing: 1.2,
-                  fontWeight: FontWeight.w400,
-                  color: Colors.white,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Bouira ",
+                  style: TextStyle(
+                    fontFamily: 'Product Sans',
+                    fontSize: 30.0,
+                    wordSpacing: 1,
+                    letterSpacing: 1.2,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.white,
+                  ),
                 ),
-                children: [
-                  TextSpan(
-                    text: "Bouira ",
+                Container(
+                  child: Icon(
+                    Icons.location_on,
+                    size: 35,
+                    color: Color(0xFFF56210),
                   ),
-                  WidgetSpan(
-                    child: Icon(
-                      Icons.location_on,
-                      size: 29,
-                      color: Color(0xFFF56210),
-                    ),
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
             const SizedBox(
-              height: 45,
+              height: 30,
             ),
-            Expanded(
-              flex: 2,
-              child: Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white,
-                    width: 2.0,
-                  ),
+            Container(
+              height: 200.0,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                border: Border.all(
+                  color: Colors.white,
+                  width: 2.0,
                 ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: GoogleMap(
-                    mapType: MapType.normal,
-                    myLocationButtonEnabled: false,
-                    zoomControlsEnabled: false,
-                    indoorViewEnabled: false,
-                    mapToolbarEnabled: false,
-                    initialCameraPosition: const CameraPosition(
-                      target: LatLng(36.6599, 4.9108),
-                      zoom: 17,
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: GoogleMap(
+                  mapType: MapType.normal,
+                  myLocationButtonEnabled: false,
+                  zoomControlsEnabled: false,
+                  indoorViewEnabled: false,
+                  mapToolbarEnabled: false,
+                  initialCameraPosition: const CameraPosition(
+                    target: LatLng(36.6599, 4.9108),
+                    zoom: 17,
+                  ),
+                  onMapCreated: (GoogleMapController controller) {
+                    _controller.complete(controller);
+                  },
+                  polylines: {
+                    Polyline(
+                      polylineId: PolylineId("route"),
+                      points: polylineCoordinates,
+                      color: Colors.black,
+                      width: 6,
                     ),
-                    onMapCreated: (GoogleMapController controller) {
-                      _controller.complete(controller);
-                    },
-                    polylines: {
-                      Polyline(
-                        polylineId: PolylineId("route"),
-                        points: polylineCoordinates,
-                        color: Colors.black,
-                        width: 6,
-                      ),
-                    },
-                    markers: Set<Marker>.from(
-                      RestaurantData.restaurants.map(
-                        (restaurant) => Marker(
-                          markerId: MarkerId(restaurant.name),
-                          position: LatLng(
-                            restaurant.latitude,
-                            restaurant.longitude,
-                          ),
+                  },
+                  markers: Set<Marker>.from(
+                    RestaurantData.restaurants.map(
+                      (restaurant) => Marker(
+                        markerId: MarkerId(restaurant.name),
+                        position: LatLng(
+                          restaurant.latitude,
+                          restaurant.longitude,
                         ),
                       ),
                     ),
@@ -158,6 +156,7 @@ class HomePageState extends State<HomePage> {
                   const Text(
                     'List of Restaurants',
                     style: TextStyle(
+                      fontFamily: 'Product Sans',
                       fontSize: 29,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
@@ -174,8 +173,8 @@ class HomePageState extends State<HomePage> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Padding(
-                        padding:
-                            const EdgeInsets.only(top: 13, left: 11, right: 22),
+                        padding: const EdgeInsets.only(
+                            left: 11, right: 10.0, top: 8.0, bottom: 8.0),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Scrollbar(
@@ -185,7 +184,7 @@ class HomePageState extends State<HomePage> {
                               controller: ScrollController(),
                               separatorBuilder: (context, index) =>
                                   const SizedBox(
-                                height: 15,
+                                height: 0,
                               ),
                               itemCount: RestaurantData.restaurants.length,
                               itemBuilder: (context, index) {
@@ -214,7 +213,7 @@ class HomePageState extends State<HomePage> {
 
 Widget restaurantItem(String name, String location) {
   return Container(
-    height: 46,
+    margin: EdgeInsets.only(right: 20.0, top: 13, bottom: 13),
     decoration: const BoxDecoration(
       color: Color(0xFFF56210),
       borderRadius: BorderRadius.all(
@@ -222,7 +221,8 @@ Widget restaurantItem(String name, String location) {
       ),
     ),
     child: Padding(
-      padding: const EdgeInsets.only(right: 10, left: 20),
+      padding:
+          const EdgeInsets.only(right: 10, left: 20, top: 10.0, bottom: 10.0),
       child: Row(
         children: [
           const CircleAvatar(
@@ -240,6 +240,7 @@ Widget restaurantItem(String name, String location) {
                 Text(
                   name,
                   style: const TextStyle(
+                    fontFamily: 'Product Sans',
                     fontSize: 18,
                     color: Color(0xFFFFFFFF),
                   ),
@@ -248,6 +249,7 @@ Widget restaurantItem(String name, String location) {
                 Text(
                   location,
                   style: const TextStyle(
+                    fontFamily: 'Product Sans',
                     color: Color(0xFFFFFFFF),
                     fontSize: 10,
                   ),
@@ -261,7 +263,8 @@ Widget restaurantItem(String name, String location) {
               Text(
                 '150m',
                 style: TextStyle(
-                  fontSize: 15,
+                  fontFamily: 'Product Sans',
+                  fontSize: 18,
                   color: Color(0xFFFFFFFF),
                 ),
               ),

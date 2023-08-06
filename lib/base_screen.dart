@@ -4,7 +4,7 @@ import 'package:makla/pages/notification_screen.dart';
 import 'package:makla/pages/home_screen.dart';
 import 'package:makla/pages/profile_screen.dart';
 import 'package:makla/pages/search_screen.dart';
-import 'package:persistent_bottom_nav_bar/persistent_tab_view.dart';
+import 'package:persistent_bottom_nav_bar_v2/persistent-tab-view.dart';
 
 class BaseScreen extends StatefulWidget {
   const BaseScreen({Key? key}) : super(key: key);
@@ -18,7 +18,7 @@ class _BaseScreenState extends State<BaseScreen> {
   List<Widget> _buildScreens() {
     return [
       const HomePage(),
-      const SearchScreen(),
+      SearchScreen(),
       const NotificationScreen(),
       const ProfileScreen(),
     ];
@@ -83,13 +83,13 @@ class _BaseScreenState extends State<BaseScreen> {
       popAllScreensOnTapOfSelectedTab: true,
       popActionScreens: PopActionScreensType.all,
       itemAnimationProperties: const ItemAnimationProperties(
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 300),
         curve: Curves.ease,
       ),
       screenTransitionAnimation: const ScreenTransitionAnimation(
         animateTabTransition: true,
         curve: Curves.ease,
-        duration: Duration(milliseconds: 200),
+        duration: Duration(milliseconds: 300),
       ),
       navBarStyle:
           NavBarStyle.style3, // Choose the nav bar style with this property.
