@@ -1,7 +1,5 @@
-import 'package:flutter/src/widgets/container.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makla/base_screen.dart';
+
 import 'package:makla/firstslide.dart';
 
 const orangeColor = Color(0xFFF56210);
@@ -21,10 +19,10 @@ class _StartscreenState extends State<Startscreen> {
       body: Center(
         child: Column(
           children: [
-            SizedBox(
-              height: 200.0,
+            const SizedBox(
+              height: 100.0,
             ),
-            Text(
+            const Text(
               'M',
               textAlign: TextAlign.end,
               style: TextStyle(
@@ -32,8 +30,8 @@ class _StartscreenState extends State<Startscreen> {
                   fontFamily: 'Digory Doodles',
                   fontSize: 130.0),
             ),
-            SizedBox(height: 0.0),
-            Text(
+            const SizedBox(height: 0.0),
+            const Text(
               'makla',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -41,14 +39,14 @@ class _StartscreenState extends State<Startscreen> {
                   fontFamily: 'Digory Doodles',
                   fontSize: 30.0),
             ),
-            SizedBox(
-              height: 180.0,
+            Expanded(
+              child: SizedBox(),
             ),
             Container(
               padding: const EdgeInsets.all(4.0),
               height: 60,
               width: 60,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 color: orangeColor,
                 shape: BoxShape.circle,
               ),
@@ -56,20 +54,23 @@ class _StartscreenState extends State<Startscreen> {
                 onPressed: () {
                   Navigator.push(
                     context,
-                    MaterialPageRoute(builder: (context) => Firstslide()),
+                    MaterialPageRoute(builder: (context) => const Firstslide()),
                   );
                 },
-                child: Image(
-                  image: AssetImage('assets/arrowRight.png'),
-                ),
                 style: ElevatedButton.styleFrom(
                   elevation: 0.0,
                   shadowColor: Colors.transparent,
                   backgroundColor: orangeColor,
                   padding: const EdgeInsets.all(3.0),
                 ),
+                child: const Image(
+                  image: AssetImage('assets/arrowRight.png'),
+                ),
               ),
             ),
+            SizedBox(
+              height: 40,
+            )
           ],
         ),
       ),

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:makla/loginpage.dart';
-import 'package:makla/secondslide.dart';
 
-import 'base_screen.dart';
 import 'custom_app_bar.dart';
 
 const orangeColor = Color(0xFFF56210);
+
+double getMaxScreenHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}
 
 class Fourthslide extends StatefulWidget {
   const Fourthslide({super.key});
@@ -17,42 +19,73 @@ class Fourthslide extends StatefulWidget {
 class _FourthslideState extends State<Fourthslide> {
   @override
   Widget build(BuildContext context) {
+    var heightDevice = getMaxScreenHeight(context);
     return Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         backgroundColor: Colors.black,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
+          padding: const EdgeInsets.symmetric(horizontal: 20.0),
           child: Column(
             children: [
-              SizedBox(
+              const SizedBox(
                 height: 20.0,
               ),
-              Container(
-                margin: EdgeInsets.only(right: 20),
-                child: Image(
-                  image: AssetImage('assets/thirdslide.png'),
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Image(
+                    height: 0.57 * heightDevice,
+                    image: AssetImage('assets/welcome2.png'),
+                  ),
+                  SizedBox(
+                    width: 7.0,
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image(
+                        height: 0.1 * heightDevice,
+                        image: AssetImage('assets/M.png'),
+                      ),
+                      SizedBox(
+                        height: 0.02 * heightDevice,
+                      ),
+                      Image(
+                        height: 0.02 * heightDevice,
+                        image: AssetImage('assets/Makla.png'),
+                      ),
+                      SizedBox(
+                        height: 0.04 * heightDevice,
+                      ),
+                      SizedBox(
+                        width: 0.2 * heightDevice,
+                        child: Text(
+                          "N°1 in Algeria for delivering Food !",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                              color: Colors.white,
+                              fontFamily: 'Product Sans',
+                              fontSize: 0.02 * heightDevice),
+                        ),
+                      )
+                    ],
+                  )
+                ],
               ),
               SizedBox(
-                height: 30.0,
-              ),
-              Text(
-                "It is a long established fact that a reader will be distracted by the readable content of a page when ",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Product Sans',
-                    fontSize: 20.0),
+                height: 0.04 * heightDevice,
               ),
               Expanded(
                 child: SizedBox(
-                  height: 40.0,
+                  height: 0.057 * heightDevice,
                 ),
               ),
               Container(
-                padding: const EdgeInsets.all(4.0),
-                height: 50,
-                width: 130,
+                padding: EdgeInsets.only(
+                    bottom: 0.005 * heightDevice,
+                    left: 0.04 * heightDevice,
+                    right: 0.04 * heightDevice,
+                    top: 0.005 * heightDevice),
                 decoration: BoxDecoration(
                     color: orangeColor,
                     borderRadius: BorderRadius.circular(12.0)),
@@ -64,79 +97,89 @@ class _FourthslideState extends State<Fourthslide> {
                           builder: (context) => const Loginpage()),
                     );
                   },
-                  child: const Text(
-                    'Next',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Product Sans',
-                      fontSize: 25,
-                    ),
-                  ),
                   style: ElevatedButton.styleFrom(
                     elevation: 0.0,
                     shadowColor: Colors.transparent,
                     backgroundColor: orangeColor,
                     padding: const EdgeInsets.all(3.0),
                   ),
+                  child: Text(
+                    'Get Started',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Product Sans',
+                      fontSize: 0.036 * heightDevice,
+                    ),
+                  ),
                 ),
               ),
               SizedBox(
-                height: 20,
+                height: 0.02 * heightDevice,
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Container(
-                    height: 10,
-                    width: 10,
+                    height: 0.01 * heightDevice,
+                    width: 0.01 * heightDevice,
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.01 * heightDevice,
+                  ),
+                  Container(
+                    height: 0.01 * heightDevice,
+                    width: 0.01 * heightDevice,
+                    decoration: BoxDecoration(
+                      color: whiteColor,
+                      borderRadius: BorderRadius.circular(20),
+                    ),
+                  ),
+                  SizedBox(
+                    width: 0.01 * heightDevice,
+                  ),
+                  Container(
+                    height: 0.01 * heightDevice,
+                    width: 0.01 * heightDevice,
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(20),
                     ),
                   ),
                   SizedBox(
-                    width: 7.0,
+                    width: 0.01 * heightDevice,
                   ),
                   Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    height: 10,
-                    width: 10,
+                    height: 0.01 * heightDevice,
+                    width: 0.01 * heightDevice,
                     decoration: BoxDecoration(
                       color: orangeColor,
                       borderRadius: BorderRadius.circular(20),
                     ),
-                  )
+                  ),
                 ],
               ),
-              SizedBox(
-                height: 7.0,
+              const Expanded(child: SizedBox()),
+              Text(
+                'Copyright © 2023',
+                style: TextStyle(
+                    fontSize: 0.017 * heightDevice,
+                    fontFamily: 'Product Sans',
+                    color: Colors.white54),
               ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  onSurface: orangeColor,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Secondslide()),
-                  );
-                },
-                child: Text('Skip'),
+              Text(
+                'All rights reserved.',
+                style: TextStyle(
+                    fontSize: 0.017 * heightDevice,
+                    fontFamily: 'Product Sans',
+                    color: Colors.white54),
               ),
               SizedBox(
-                height: 30.0,
+                height: 0.01 * heightDevice,
               ),
             ],
           ),

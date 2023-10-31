@@ -1,12 +1,13 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:makla/base_screen.dart';
+
 import 'package:makla/custom_app_bar.dart';
 import 'package:makla/fourthslide.dart';
-import 'package:makla/secondslide.dart';
+import 'package:makla/loginpage.dart';
 
 const orangeColor = Color(0xFFF56210);
+double getMaxScreenHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}
 
 class Thirdslide extends StatefulWidget {
   const Thirdslide({super.key});
@@ -18,46 +19,121 @@ class Thirdslide extends StatefulWidget {
 class _ThirdslideState extends State<Thirdslide> {
   @override
   Widget build(BuildContext context) {
+    var heightDevice = getMaxScreenHeight(context);
     return Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         backgroundColor: Colors.black,
         body: Padding(
-          padding: EdgeInsets.symmetric(horizontal: 20.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: 20.0,
-              ),
-              Container(
-                margin: EdgeInsets.only(right: 20),
-                child: Image(
-                  image: AssetImage('assets/thirdslide.png'),
+            padding: const EdgeInsets.symmetric(horizontal: 20.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 0.01 * heightDevice,
                 ),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-              Text(
-                "It is a long established fact that a reader will be distracted by the readable content of a page when ",
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                    color: Colors.white,
-                    fontFamily: 'Product Sans',
-                    fontSize: 20.0),
-              ),
-              Expanded(
-                child: SizedBox(
-                  height: 40.0,
+                Container(
+                  margin: const EdgeInsets.only(right: 40.0),
+                  child: Image(
+                    height: 0.53 * heightDevice,
+                    image: AssetImage('assets/next3.png'),
+                  ),
                 ),
-              ),
-              Container(
-                padding: const EdgeInsets.all(4.0),
-                height: 50,
-                width: 130,
-                decoration: BoxDecoration(
-                    color: orangeColor,
-                    borderRadius: BorderRadius.circular(12.0)),
-                child: ElevatedButton(
+                SizedBox(
+                  height: 0.02 * heightDevice,
+                ),
+                Text(
+                  "It is a long established fact that a reader will be distracted by the readable content of a page  ",
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontFamily: 'Product Sans',
+                      fontSize: 0.02 * heightDevice),
+                ),
+                SizedBox(
+                  height: 0.02 * heightDevice,
+                ),
+                Container(
+                  padding: EdgeInsets.all(0.005 * heightDevice),
+                  height: 0.06 * heightDevice,
+                  width: 0.14 * heightDevice,
+                  decoration: BoxDecoration(
+                      color: orangeColor,
+                      borderRadius: BorderRadius.circular(12.0)),
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const Fourthslide()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      elevation: 0.0,
+                      shadowColor: Colors.transparent,
+                      backgroundColor: orangeColor,
+                      padding: EdgeInsets.all(0.004 * heightDevice),
+                    ),
+                    child: Text(
+                      'Next',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'Product Sans',
+                        fontSize: 0.03 * heightDevice,
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: 0.02 * heightDevice,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Container(
+                      height: 0.01 * heightDevice,
+                      width: 0.01 * heightDevice,
+                      decoration: BoxDecoration(
+                        color: whiteColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 0.01 * heightDevice,
+                    ),
+                    Container(
+                      height: 0.01 * heightDevice,
+                      width: 0.01 * heightDevice,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 0.01 * heightDevice,
+                    ),
+                    Container(
+                      height: 0.01 * heightDevice,
+                      width: 0.01 * heightDevice,
+                      decoration: BoxDecoration(
+                        color: orangeColor,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    SizedBox(
+                      width: 0.01 * heightDevice,
+                    ),
+                    Container(
+                      height: 0.01 * heightDevice,
+                      width: 0.01 * heightDevice,
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                  ],
+                ),
+                TextButton(
+                  style: TextButton.styleFrom(),
                   onPressed: () {
                     Navigator.push(
                       context,
@@ -66,81 +142,16 @@ class _ThirdslideState extends State<Thirdslide> {
                     );
                   },
                   child: const Text(
-                    'Next',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontFamily: 'Product Sans',
-                      fontSize: 25,
-                    ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    elevation: 0.0,
-                    shadowColor: Colors.transparent,
-                    backgroundColor: orangeColor,
-                    padding: const EdgeInsets.all(3.0),
+                    'Skip',
+                    style: TextStyle(fontFamily: 'Product Sans'),
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20,
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
+                Expanded(
+                  child: SizedBox(
+                    height: 0.02 * heightDevice,
                   ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  ),
-                  SizedBox(
-                    width: 7.0,
-                  ),
-                  Container(
-                    height: 10,
-                    width: 10,
-                    decoration: BoxDecoration(
-                      color: orangeColor,
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                  )
-                ],
-              ),
-              SizedBox(
-                height: 7.0,
-              ),
-              TextButton(
-                style: TextButton.styleFrom(
-                  onSurface: orangeColor,
-                ),
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const Secondslide()),
-                  );
-                },
-                child: Text('Skip'),
-              ),
-              SizedBox(
-                height: 30.0,
-              ),
-            ],
-          ),
-        ));
+                )
+              ],
+            )));
   }
 }

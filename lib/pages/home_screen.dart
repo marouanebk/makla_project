@@ -6,6 +6,10 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:makla/custom_app_bar.dart';
 import 'package:makla/data.dart';
 
+double getMaxScreenHeight(BuildContext context) {
+  return MediaQuery.of(context).size.height;
+}
+
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
@@ -68,9 +72,10 @@ class HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var heightDevice = getMaxScreenHeight(context);
     return Scaffold(
       backgroundColor: const Color(0xFF000000),
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
@@ -82,27 +87,25 @@ class HomePageState extends State<HomePage> {
                   "Bouira ",
                   style: TextStyle(
                     fontFamily: 'Product Sans',
-                    fontSize: 30.0,
+                    fontSize: 0.04 * heightDevice,
                     wordSpacing: 1,
                     letterSpacing: 1.2,
                     fontWeight: FontWeight.w400,
                     color: Colors.white,
                   ),
                 ),
-                Container(
-                  child: Icon(
-                    Icons.location_on,
-                    size: 35,
-                    color: Color(0xFFF56210),
-                  ),
+                Icon(
+                  Icons.location_on,
+                  size: 0.04 * heightDevice,
+                  color: const Color(0xFFF56210),
                 ),
               ],
             ),
-            const SizedBox(
-              height: 30,
+            SizedBox(
+              height: 0.02 * heightDevice,
             ),
             Container(
-              height: 200.0,
+              height: 0.23 * heightDevice,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
                 border: Border.all(
@@ -127,7 +130,7 @@ class HomePageState extends State<HomePage> {
                   },
                   polylines: {
                     Polyline(
-                      polylineId: PolylineId("route"),
+                      polylineId: const PolylineId("route"),
                       points: polylineCoordinates,
                       color: Colors.black,
                       width: 6,
@@ -147,38 +150,40 @@ class HomePageState extends State<HomePage> {
                 ),
               ),
             ),
-            const SizedBox(height: 30),
+            SizedBox(height: 0.02 * heightDevice),
             Expanded(
               flex: 2,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
+                  Text(
                     'List of Restaurants',
                     style: TextStyle(
                       fontFamily: 'Product Sans',
-                      fontSize: 29,
+                      fontSize: 0.03 * heightDevice,
                       fontWeight: FontWeight.w400,
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 10),
+                  SizedBox(height: 0.01 * heightDevice),
                   Expanded(
                     child: Container(
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                          color: const Color(0xFFF56210),
-                          width: 2.0,
-                        ),
-                        borderRadius: BorderRadius.circular(20),
-                      ),
+                      // decoration: BoxDecoration(
+                      //   border: Border.all(
+                      //     color: const Color(0xFFF56210),
+                      //     width: 2.0,
+                      //   ),
+                      //   borderRadius: BorderRadius.circular(20),
+                      // ),
                       child: Padding(
-                        padding: const EdgeInsets.only(
-                            left: 11, right: 10.0, top: 8.0, bottom: 8.0),
+                        padding: EdgeInsets.only(
+                            left: 0.01 * heightDevice,
+                            right: 0.01 * heightDevice,
+                            top: 0.01 * heightDevice,
+                            bottom: 0.01 * heightDevice),
                         child: Align(
                           alignment: Alignment.centerRight,
                           child: Scrollbar(
-                            thumbVisibility: true,
                             controller: ScrollController(),
                             child: ListView.separated(
                               controller: ScrollController(),
@@ -190,10 +195,8 @@ class HomePageState extends State<HomePage> {
                               itemBuilder: (context, index) {
                                 final restaurant =
                                     RestaurantData.restaurants[index];
-                                return restaurantItem(
-                                  restaurant.name,
-                                  restaurant.location,
-                                );
+                                return restaurantItem(restaurant.name,
+                                    restaurant.location, heightDevice);
                               },
                             ),
                           ),
@@ -211,9 +214,10 @@ class HomePageState extends State<HomePage> {
   }
 }
 
-Widget restaurantItem(String name, String location) {
+Widget restaurantItem(String name, String location, var height) {
   return Container(
-    margin: EdgeInsets.only(right: 20.0, top: 13, bottom: 13),
+    margin: EdgeInsets.only(
+        right: 0.01 * height, top: 0.01 * height, bottom: 0.01 * height),
     decoration: const BoxDecoration(
       color: Color(0xFFF56210),
       borderRadius: BorderRadius.all(
@@ -221,8 +225,11 @@ Widget restaurantItem(String name, String location) {
       ),
     ),
     child: Padding(
-      padding:
-          const EdgeInsets.only(right: 10, left: 20, top: 10.0, bottom: 10.0),
+      padding: EdgeInsets.only(
+          right: 0.02 * height,
+          left: 0.02 * height,
+          top: 0.01 * height,
+          bottom: 0.01 * height),
       child: Row(
         children: [
           const CircleAvatar(
@@ -231,7 +238,7 @@ Widget restaurantItem(String name, String location) {
               "https://media-cdn.tripadvisor.com/media/photo-s/1b/6b/33/12/getlstd-property-photo.jpg",
             ),
           ),
-          const SizedBox(width: 16),
+          SizedBox(width: 0.01 * height),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -239,39 +246,39 @@ Widget restaurantItem(String name, String location) {
               children: [
                 Text(
                   name,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Product Sans',
-                    fontSize: 18,
+                    fontSize: 0.016 * height,
                     color: Color(0xFFFFFFFF),
                   ),
                   textAlign: TextAlign.center,
                 ),
                 Text(
                   location,
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontFamily: 'Product Sans',
                     color: Color(0xFFFFFFFF),
-                    fontSize: 10,
+                    fontSize: 0.01 * height,
                   ),
                   textAlign: TextAlign.center,
                 ),
               ],
             ),
           ),
-          const Row(
+          Row(
             children: [
               Text(
                 '150m',
                 style: TextStyle(
                   fontFamily: 'Product Sans',
-                  fontSize: 18,
+                  fontSize: 0.018 * height,
                   color: Color(0xFFFFFFFF),
                 ),
               ),
-              SizedBox(width: 4),
+              SizedBox(width: 0.005 * height),
               Icon(
                 Icons.location_on_outlined,
-                size: 21,
+                size: 0.02 * height,
                 color: Color(0xFFFFFFFF),
               ),
             ],

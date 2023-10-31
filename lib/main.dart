@@ -1,9 +1,6 @@
 import 'package:animated_splash_screen/animated_splash_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:makla/base_screen.dart';
-import 'package:makla/firstslide.dart';
-import 'package:makla/pages/home_screen.dart';
-import 'package:makla/restaurant_detail.dart';
+
 import 'package:makla/startscreen.dart';
 import 'package:page_transition/page_transition.dart';
 
@@ -22,18 +19,18 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           scrollbarTheme: ScrollbarThemeData(
             thumbColor: MaterialStateProperty.all<Color>(
-                Color(0xFFF56210)), // Set the color here
-            isAlwaysShown: true,
-            radius: Radius.circular(20.0),
+                const Color(0xFFF56210)), // Set the color here
+
+            radius: const Radius.circular(20.0),
           ),
-          colorScheme: ColorScheme.fromSeed(seedColor: Color(0xFFF56210)),
+          colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFFF56210)),
           useMaterial3: true,
         ),
         //home: const  MapSample()
         // home:  RestaurantDetail());
         home: AnimatedSplashScreen(
           backgroundColor: Colors.black,
-          splash: Text(
+          splash: const Text(
             'M',
             textAlign: TextAlign.center,
             style: TextStyle(
@@ -41,10 +38,10 @@ class MyApp extends StatelessWidget {
                 fontFamily: 'Digory Doodles',
                 fontSize: 130.0),
           ),
-          nextScreen: Startscreen(),
+          nextScreen: const Startscreen(),
           splashIconSize: 300,
-          duration: 3000,
-          animationDuration: const Duration(milliseconds: 3000),
+          duration: 2000,
+          animationDuration: const Duration(milliseconds: 2000),
           splashTransition: SplashTransition.fadeTransition,
           pageTransitionType: PageTransitionType.fade,
         ));

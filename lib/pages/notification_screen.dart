@@ -8,7 +8,7 @@ class NotificationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: CustomAppBar(),
+      appBar: const CustomAppBar(),
       backgroundColor: Colors.black,
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -31,6 +31,7 @@ class NotificationScreen extends StatelessWidget {
                 child: Column(
                   children: [
                     ListView.separated(
+                      controller: ScrollController(),
                       separatorBuilder: (context, index) => const SizedBox(
                         height: 15,
                       ),
@@ -110,12 +111,12 @@ class NotificationScreen extends StatelessWidget {
                         color: Colors.white),
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   width: 20,
                 ),
                 InkWell(
                   child: RichText(
-                    text: TextSpan(
+                    text: const TextSpan(
                       text: 'View',
                       style: TextStyle(
                         decoration: TextDecoration.underline,

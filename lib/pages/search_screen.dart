@@ -1,47 +1,48 @@
 import 'package:flutter/material.dart';
 import 'package:makla/custom_app_bar.dart';
 import 'package:makla/data.dart';
-import 'package:makla/firstslide.dart';
 
 import 'home_screen.dart';
 
 class SearchScreen extends StatefulWidget {
+  const SearchScreen({super.key});
   @override
-  _SearchScreenState createState() => _SearchScreenState();
+  State<SearchScreen> createState() => _SearchScreenState();
 }
 
 class _SearchScreenState extends State<SearchScreen> {
-  final FocusNode _focusNode = FocusNode();
   @override
   Widget build(BuildContext context) {
+    FocusNode _focusNode = FocusNode();
+    var heightDevice = getMaxScreenHeight(context);
     return GestureDetector(
       onTap: () {
         // Request focus when the user taps on the widget
         FocusScope.of(context).requestFocus(_focusNode);
       },
       child: Scaffold(
-        appBar: CustomAppBar(),
+        appBar: const CustomAppBar(),
         backgroundColor: Colors.black,
         body: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Search",
                 style: TextStyle(
                   fontFamily: 'Product Sans',
-                  fontSize: 29,
+                  fontSize: 0.04 * heightDevice,
                   fontWeight: FontWeight.w400,
                   color: Colors.white,
                 ),
               ),
-              const SizedBox(
-                height: 22,
+              SizedBox(
+                height: 0.02 * heightDevice,
               ),
               Container(
-                height: 45,
-                padding: const EdgeInsets.symmetric(horizontal: 20),
+                height: 0.06 * heightDevice,
+                padding: EdgeInsets.symmetric(horizontal: 0.02 * heightDevice),
                 decoration: BoxDecoration(
                   color: Colors.black,
                   borderRadius: BorderRadius.circular(20),
@@ -54,23 +55,21 @@ class _SearchScreenState extends State<SearchScreen> {
                   children: [
                     Expanded(
                       child: TextField(
-                        focusNode: _focusNode,
-                        enabled: _focusNode.hasFocus,
                         style: TextStyle(
                             color: Colors.white,
                             fontFamily: 'Product Sans',
-                            fontSize: 15),
+                            fontSize: 0.015 * heightDevice),
                         decoration: InputDecoration(
                           hintText: 'Search...',
                           hintStyle: TextStyle(
                               color: Colors.white,
                               fontFamily: 'Product Sans',
-                              fontSize: 15),
+                              fontSize: 0.018 * heightDevice),
                           border: InputBorder.none,
                         ),
                       ),
                     ),
-                    Icon(
+                    const Icon(
                       Icons.search,
                       color: Color(0xFFF56210),
                       size: 21,
@@ -107,10 +106,8 @@ class _SearchScreenState extends State<SearchScreen> {
                           itemBuilder: (context, index) {
                             final restaurant =
                                 RestaurantData.restaurants[index];
-                            return restaurantItem(
-                              restaurant.name,
-                              restaurant.location,
-                            );
+                            return restaurantItem(restaurant.name,
+                                restaurant.location, heightDevice);
                           },
                         ),
                       ),
